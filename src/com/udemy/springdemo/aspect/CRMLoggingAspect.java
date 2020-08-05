@@ -33,7 +33,7 @@ public class CRMLoggingAspect {
 	private void forAppFlow() {}
 	
 	// add @Before advice
-	@Before("forAppFLow")
+	@Before("forAppFlow()")
 	public void before(JoinPoint theJoinPoint) {
 		
 		// display method we are calling
