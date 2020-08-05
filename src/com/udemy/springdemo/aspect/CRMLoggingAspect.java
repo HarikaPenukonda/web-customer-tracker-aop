@@ -3,6 +3,7 @@ package com.udemy.springdemo.aspect;
 import java.util.logging.Logger;
 
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 
@@ -13,8 +14,21 @@ public class CRMLoggingAspect {
 	
 	// setup logger
 	private Logger myLogger = Logger.getLogger(getClass().getName());
-	// setup pointcut declarations
 	
+	// setup pointcut declarations for controller
+	@Pointcut("execution(* com.udemy.springdemo.controller.*.*.(..))")
+	private void forControllerPackage() {}
+	
+	// setup pointcut declarations for service
+	@Pointcut("execution(* com.udemy.springdemo.service.*.*.(..))")
+	private void forServicePackage() {}
+	
+	// setup pointcut declarations for dao
+	@Pointcut("execution(* com.udemy.springdemo.dao.*.*.(..))")
+	private void forDaoPackage() {}
+	
+	@Pointcut("forControllerPackage() || forServicePackage() || forDaoPackage()") // match on these three packages 
+	private void forAppFlow() {}
 	// add @Before advice
 	
 	// add @AfterReturning advice
